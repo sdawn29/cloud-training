@@ -1,0 +1,12 @@
+SQL> /
+Enter value for v_n1: 5
+old   2: numb1 number:=&v_n1;
+new   2: numb1 number:=5;
+Enter value for v_n2: 6
+old   3: numb2 number:=&v_n2;
+new   3: numb2 number:=6;
+The sum is 11
+
+PL/SQL procedure successfully completed.
+
+SQL>
