@@ -1,0 +1,245 @@
+  1  DECLARE
+  2     v_counter NUMBER:=1;
+  3  BEGIN
+  4     LOOP
+  5             v_counter := v_counter + 1;
+  6             DBMS_OUTPUT.PUT_LINE(v_counter);
+  7             EXIT WHEN v_counter > 9;
+  8     END LOOP;
+  9* END;
+SQL> /
+2
+3
+4
+5
+6
+7
+8
+9
+10
+
+
+
+declare
+	n number := 4; 
+	i number; 
+	j number; 
+begin 
+	for i in 1..n 
+	loop 
+		for j in 1..i 
+		loop 
+			dbms_output.put('*'); 
+		end loop; 
+		dbms_output.new_line; 
+	end loop; 
+end; 
+
+
+
+  1  declare
+  2  v_emp emp%rowtype;
+  3  v_empno emp.empno%type:=&v_empno;
+  4  begin
+  5  select * into v_emp
+  6  from emp
+  7  where empno = v_empno;
+  8  insert into temp values(v_emp.sal, v_emp.ename);
+  9  dbms_output.put_line(v_emp.ename||' '|| v_emp.sal);
+ 10* end;
+SQL> /
+Enter value for v_empno: 7900
+old   3: v_empno emp.empno%type:=&v_empno;
+new   3: v_empno emp.empno%type:=7900;
+JAMES 950
+
+PL/SQL procedure successfully completed.
+
+SQL> select * from temp;
+
+     REGNO NAME
+---------- ----------
+       950 JAMES
+        12 hello
+        10 john
+
+
+
+  1  declare
+  2  cursor c1 is select ename, sal from emp
+  3  where deptno = 10;
+  4  v_name emp.ename%type;
+  5  v_sal emp.sal%type;
+  6  begin
+  7  open c1;
+  8  loop
+  9  fetch c1 into v_name, v_sal;
+ 10  exit when c1%notfound;
+ 11  dbms_output.put_line(v_name||v_sal);
+ 12  end loop;
+ 13  close c1;
+ 14* end;
+SQL> /
+CLARK2450
+KING5000
+MILLER1300
+
+PL/SQL procedure successfully completed.
+
+
+
+
+
+  1  declare
+  2  cursor c1 is select * from emp
+  3  where deptno = 10;
+  4  v_emp emp%rowtype;
+  5  begin
+  6  open c1;
+  7  loop
+  8  fetch c1 into v_emp;
+  9  exit when c1%notfound;
+ 10  dbms_output.put_line(v_emp.ename||v_emp.sal||v_emp.job);
+ 11  end loop;
+ 12  close c1;
+ 13* end;
+SQL> /
+CLARK2450MANAGER
+KING5000PRESIDENT
+MILLER1300CLERK
+
+PL/SQL procedure successfully completed.
+
+SQL>
+
+
+  1  declare
+  2  cursor c1 is select * from emp
+  3  where deptno = 10;
+  4  v_emp emp%rowtype;
+  5  begin
+  6  if not c1%isopen then
+  7  open c1;
+  8  end if;
+  9  loop
+ 10  fetch c1 into v_emp;
+ 11  exit when c1%notfound and c1%rowcount<=5;
+ 12  dbms_output.put_line(v_emp.ename||v_emp.sal||v_emp.job);
+ 13  end loop;
+ 14  close c1;
+ 15* end;
+SQL> /
+CLARK2450MANAGER
+KING5000PRESIDENT
+MILLER1300CLERK
+
+PL/SQL procedure successfully completed.
+/
+
+  1  declare
+  2  begin
+  3  for i in (select empno, ename, hiredate from emp where deptno=30)
+  4  loop
+  5  dbms_output.put_line(i.empno||' '||i.ename||' '||i.hiredate);
+  6  end loop;
+  7* end;
+SQL> /
+7499 ALLEN 20-FEB-81
+7521 WARD 22-FEB-81
+7654 MARTIN 28-SEP-81
+7698 BLAKE 01-MAY-81
+7844 TURNER 08-SEP-81
+7900 JAMES 03-DEC-81
+
+
+
+
+
+  1  declare
+  2  v_deptno emp.deptno%type:=&v_deptno;
+  3  v_ename emp.ename%type;
+  4  begin
+  5  select ename into v_ename
+  6  from emp
+  7  where deptno = v_deptno;
+  8  exception
+  9  when too_many_rows then
+ 10  dbms_output.put_line('many rows');
+ 11  when no_data_found then
+ 12  dbms_output.put_line('no value');
+ 13* end;
+SQL> /
+Enter value for v_deptno: 10
+old   2: v_deptno emp.deptno%type:=&v_deptno;
+new   2: v_deptno emp.deptno%type:=10;
+many rows
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  e_insert_excep EXCEPTION;
+  3  PRAGMA EXCEPTION_INIT(e_insert_excep, -01722);
+  4  BEGIN
+  5  DELETE FROM dept WHERE deptno = 'a';
+  6  EXCEPTION
+  7  WHEN e_insert_excep THEN
+  8  DBMS_OUTPUT.PUT_LINE('DELETE OPERATION FAILED');
+  9  DBMS_OUTPUT.PUT_LINE(SQLERRM);
+ 10* END;
+SQL> /
+DELETE OPERATION FAILED
+ORA-01722: invalid number
+
+PL/SQL procedure successfully completed.
+
+
+
+
+
+  1  declare
+  2  e1 exception;
+  3  begin
+  4  delete from dept
+  5  where deptno = &v_deptno;
+  6  if sql%notfound then
+  7  raise e1;
+  8  end if;
+  9  exception
+ 10  when e1 then
+ 11  dbms_output.put_line('no data found');
+ 12* end;
+SQL> /
+Enter value for v_deptno: 87
+old   5: where deptno = &v_deptno;
+new   5: where deptno = 87;
+no data found
+
+PL/SQL procedure successfully completed.
+
+
+
+
+  1  declare
+  2  v_name emp.ename%type;
+  3  begin
+  4  select ename into v_name
+  5  from emp
+  6  where empno=&v_empno;
+  7  exception
+  8  when no_data_found then
+  9  raise_application_error(-20001, 'NO DATA FOUND');
+ 10  dbms_output.put_line(sqlerrm);
+ 11* end;
+SQL> /
+Enter value for v_empno: 78
+old   6: where empno=&v_empno;
+new   6: where empno=78;
+declare
+*
+ERROR at line 1:
+ORA-20001: NO DATA FOUND
+ORA-06512: at line 9
+
