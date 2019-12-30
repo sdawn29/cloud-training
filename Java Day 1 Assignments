@@ -1,0 +1,111 @@
+
+public class Pattern {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		for(int i = 0; i<=5; i++) {
+			for(int j =0; j<=i; j++) {
+				if(i%2 == 0) {
+					System.out.print('*');
+				} else {
+					System.out.print('+');
+				}
+			}
+			System.out.println();
+		}
+	}
+
+}
+
+
+
+
+
+
+
+public class ObjectCount {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		ObjectCreation ob = new ObjectCreation();
+		ob.calculate();
+		ob.calculate();
+		ob.display();
+	}
+
+}
+
+class ObjectCreation {
+	int count = 0;
+	void display() {
+		System.out.println("The number of times the object is called "+count);
+	}
+	void calculate() {
+		count++;
+	}
+}
+
+
+
+
+import java.util.*;
+public class DateTime {
+	public static void main(String args[]) {
+		Date date = new Date();
+		System.out.println(date);
+	}
+}
+
+
+
+
+
+import java.util.*;
+public class Factorial {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter a Number: ");
+		int n = sc.nextInt();
+		int fact = 1;
+		for(int i = n; i >= 1; i--) {
+			fact = fact*i;
+		}
+		System.out.println("the factorial of "+n+" is "+fact);
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+import java.util.*;
+public class SmallestNumber {
+	public static void main(String args[]) {
+		Scanner sc = new Scanner(System.in);
+		Calculations ob = new Calculations();
+		int x = sc.nextInt();
+		int y = sc.nextInt();
+		int z = sc.nextInt();
+		ob.small(x,y,z);
+	}
+}
+
+class Calculations {
+	void small(int x, int y, int z) {
+		if(x<y && x<z) {
+			System.out.println(x);
+		} else if(z<y && z<x) {
+			System.out.println(z);
+		} else if(y<z && y<x) {
+			System.out.println(y);
+		}
+	}
+}
