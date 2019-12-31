@@ -77,3 +77,46 @@ class account1 {
 	}
 	
 }
+
+
+
+
+
+
+import java.util.*;
+public class Books {
+	public static void main(String args[]) {
+		Scanner sc = new Scanner(System.in);
+		Book ob = new Book("Book Name", "Book Author 1", 45, 10);
+		Book ob2 = new Book("Book Name 2", "Book Author 2", 40, 18);
+		Book ob3 = new Book("Book Name 3", "Book Author 3", 30, 12);
+		System.out.println("Enter the name of the book: ");
+		String b = sc.nextLine();
+		System.out.println("Enter the number of the book: ");
+		int no = sc.nextInt();
+		check(b,no, ob, ob2, ob3);
+		sc.close();
+	}
+	
+	static void check(String t, int no, Book b, Book b2, Book b3) {
+		if(t.equals(b.title) || t.equals(b3.title) || t.equals(b2.title)) {
+			System.out.println("Book is found");
+			System.out.println("The cost of the books: " + no*b.cost);
+		} else {
+			System.out.println("Not found");
+		}
+	}
+}
+
+class Book {
+	Scanner sc = new Scanner(System.in);
+	String title,author;
+	int cost, no_of_books;
+	Book(String t,String a,int c,int n) {
+		title = t;
+		author = a;
+		cost = c;
+		no_of_books = n;
+	}
+}
+
