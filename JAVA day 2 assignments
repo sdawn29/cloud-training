@@ -1,0 +1,79 @@
+import java.util.*;
+public class Account {
+
+	public static void main(String[] args) {
+		boolean check = true;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter Name of the User");
+		String name = sc.next();
+		System.out.println("Enter Account Number of the user of the User");
+		int acno = sc.nextInt();
+		System.out.println("Enter Phone number of the User");
+		int phno = sc.nextInt();
+		System.out.println("Enter the initial balance of the User");
+		float balance = sc.nextFloat();
+		// TODO Auto-generated method stub
+		account1 ob = new account1(acno, phno, balance, name );
+		while(check) {
+			ob.getInput();
+			System.out.println("Press 'Y' to continue...");
+			char ch = sc.next().charAt(0);
+			if(ch == 'Y') {
+				continue;
+			} else {
+				check = false;
+			}
+		}
+	}
+
+}
+
+class account1 {
+	Scanner sc = new Scanner(System.in);
+	int accno,phoneNo;
+	String name;
+	float balance;
+	
+	account1(int a, int b, float c, String n) {
+		accno = a;
+		phoneNo = b;
+		balance = c;
+		name = n;
+	}
+	
+	void getInput() {
+		System.out.println("What do you want to do?");
+		System.out.println("1.DEPOSIT    2.WITHDRAW");
+		int choice = sc.nextInt();
+		switch(choice) {
+		case 1: 
+			deposit();
+//			System.out.println("Deposit is called");
+			break;
+		
+		case 2:
+			withdraw();
+			break;
+			
+		default:
+			System.out.println("Invalid Choice");
+		}
+	}
+	
+	void deposit() {
+		System.out.println("Enter the amount to be deposited: ");
+		float deposit = sc.nextFloat();
+		balance = balance+deposit;
+		System.out.println("The amount deposited is: "+deposit);
+		System.out.println("The total balance is: "+balance);
+	}
+	
+	void withdraw() {
+		System.out.println("Enter the amount to be withdrawn: ");
+		float deposit = sc.nextFloat();
+		balance = balance-deposit;
+		System.out.println("The amount withdrawn is: "+deposit);
+		System.out.println("The total balance is: "+balance);
+	}
+	
+}
