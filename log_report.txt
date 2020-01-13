@@ -1,4 +1,5 @@
-IP	DATE	PICS	URL123.123.123.123	26/Apr/2000	wpaper.gif	http://www.jafsoft.com/asctortf/
+IP	DATE	PICS	URL
+123.123.123.123	26/Apr/2000	wpaper.gif	http://www.jafsoft.com/asctortf/
 123.123.123.123	26/Apr/2000	NO IMAGE	http://search.netscape.com/Computers/Data_Formats/Document/Text/RTF
 123.123.123.123	26/Apr/2000	5star2000.gif	http://www.jafsoft.com/asctortf/
 123.123.123.123	26/Apr/2000	5star.gif	http://www.jafsoft.com/asctortf/
